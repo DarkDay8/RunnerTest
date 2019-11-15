@@ -10,6 +10,12 @@ public class MenuController
     public MenuController()
     {
         view = ViewController.LoadView(viewPath) as MenuView;
-        view.ChangeText("Testing");
+        view.SetStartBtnAction(StartGame);
+    }
+
+    private void StartGame()
+    {
+        GameController gameController = new GameController();
+        ViewController.RemoveView(viewPath);
     }
 }
