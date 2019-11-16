@@ -4,21 +4,22 @@ using UnityEngine;
 
 public class ViewController : MonoBehaviour
 {
-    private static  Dictionary<string, GameObject> viewes;
+    private static  Dictionary<ViewesEnum, GameObject> viewes;
 
-    public static IView LoadView(string path)
+    //Cann't instance some same view 
+    public static IView LoadView(ViewesEnum ViewEnum)
     {
-        var view = Instantiate(Resources.Load(path) as GameObject);
+        var view = Instantiate(Resources.Load(ViewPathEnum.GetPath(ViewEnum)) as GameObject);
         if (viewes == null)
-            viewes = new Dictionary<string, GameObject>();
-        viewes.Add(path, view);
+            viewes = new Dictionary<ViewesEnum, GameObject>();
+        viewes.Add(ViewEnum, view);
         return view.GetComponent<IView>();
 
     }
-    public static bool RemoveView(string path)
+    public static bool RemoveView(ViewesEnum ViewEnum)
     {
-        Destroy(viewes[path]?.gameObject);
-        return viewes.Remove(path);
+        Destroy(viewes[ViewEnum]?.gameObject);
+        return viewes.Remove(ViewEnum);
     }
     public static void RemoveAllViewes()
     {

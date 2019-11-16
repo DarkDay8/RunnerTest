@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class GameController
 {
-    private string viewPath = "Prefabs/View/Game";
     private GameView view;
 
     public GameController()
     {
-        view = ViewController.LoadView(viewPath) as GameView;
+        view = ViewController.LoadView(ViewesEnum.Game) as GameView;
     }
 }
