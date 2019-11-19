@@ -45,8 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 2526725314790942056}
-  playerRB: {fileID: 4069133463774184171}
   distanse: {x: -3, y: 4, z: 0}
+  gui: {fileID: 3808928274030429174, guid: 1add46753b55ad042ac3ebe2fc1c2e0e, type: 3}
 --- !u!1 &1204595020071254763
 GameObject:
   m_ObjectHideFlags: 0
@@ -169,15 +169,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c63f78122f376e43bfc9e37f2201267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallTag: Wall
-  CheckTag: Checkpoint
-  wall:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-  checkpoint:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null

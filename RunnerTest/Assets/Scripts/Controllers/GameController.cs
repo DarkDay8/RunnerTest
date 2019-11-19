@@ -26,6 +26,7 @@ public class GameController
         view.GetPlayer().checkpoint = section.UpdateSections;
         view.Run = Run;
         view.SpeedAcceleration = player.SpeedAcceleration;
+        player.ChangeGUI = view.GetGUI().SetScoreValue;
     }
 
     private void Run()

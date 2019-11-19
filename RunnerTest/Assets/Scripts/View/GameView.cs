@@ -9,6 +9,8 @@ public class GameView : MonoBehaviour, IView
     private PlayerView player;    
     [SerializeField]
     private Vector3 distanse;
+    [SerializeField]
+    private GUIView gui;
 
     private float currentTimer;
     private float timerRange = 10f;
@@ -25,10 +27,13 @@ public class GameView : MonoBehaviour, IView
     public Action<Vector3> UpdatePosition;
 
 
-
+    void Awake()
+    {
+        gui = Instantiate<GUIView>(gui);
+    }
     void Start()
     {
-        camera = Camera.main;
+        camera = Camera.main;   
         playerRB = player.GetComponent<Rigidbody>();
     }
 
@@ -45,8 +50,6 @@ public class GameView : MonoBehaviour, IView
             stranting = true;
             Run();
         }
-
-
     }
 
 
@@ -71,7 +74,6 @@ public class GameView : MonoBehaviour, IView
             else
                 currentTimer += Time.fixedDeltaTime;
         }
-
     }
 
     public PlayerView GetPlayer()
@@ -81,6 +83,10 @@ public class GameView : MonoBehaviour, IView
     public void SetForce(Vector3 d)
     {
         direction = d;
+    }
+    public GUIView GetGUI()
+    {
+        return gui;
     }
 
 

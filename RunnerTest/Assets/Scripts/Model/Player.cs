@@ -54,7 +54,7 @@ public class Player
     public void AddCoins(int coins)
     {
         score += coins;
-        //ChangeGUI(score);
+        ChangeGUI(score);
         Debug.Log("Score: " + score);
     }
 
