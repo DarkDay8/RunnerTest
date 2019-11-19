@@ -8,8 +8,11 @@ public class PlayerView : MonoBehaviour
     [SerializeField]
     private string wallTag = "Wall";
     [SerializeField]
+    private string roadTag = "Road";
+    [SerializeField]
     private string CheckTag = "Checkpoint";
     public Action wall;
+    public Action road;
     public Action checkpoint;
     public Action<int> coins;
 
@@ -17,6 +20,8 @@ public class PlayerView : MonoBehaviour
     {
         if (collision.gameObject.tag.Equals(wallTag))
             wall();
+        if (collision.gameObject.tag.Equals(roadTag))
+            road();
     }
     private void OnTriggerEnter(Collider other)
     {

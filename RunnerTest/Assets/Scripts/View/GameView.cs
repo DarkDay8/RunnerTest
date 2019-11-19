@@ -6,18 +6,19 @@ using UnityEngine;
 public class GameView : MonoBehaviour, IView
 {
     [SerializeField]
-    private PlayerView player;
-    [SerializeField]
-    private Rigidbody playerRB;
+    private PlayerView player;    
     [SerializeField]
     private Vector3 distanse;
 
     private Vector3 direction;
     private new Camera camera;
+    private Rigidbody playerRB;
+    private bool stranting = false;
 
     public Action Left;
     public Action Right;
-    public Action Up;
+    public Func<float> Up;
+    public Action Run;
     public Action<Vector3> UpdatePosition;
 
 
@@ -25,6 +26,7 @@ public class GameView : MonoBehaviour, IView
     void Start()
     {
         camera = Camera.main;
+        playerRB = player.GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,13 @@ public class GameView : MonoBehaviour, IView
             Left();
         if (Input.GetKeyDown(KeyCode.D))
             Right();
+        if (Input.GetKeyDown(KeyCode.W))
+            playerRB.velocity += Vector3.up * Up();
+
+
+
+        if (Input.anyKey && !stranting)
+            Run();
 
         Vector3 newVelosity = new Vector3(direction.x, playerRB.velocity.y, direction.z);
 

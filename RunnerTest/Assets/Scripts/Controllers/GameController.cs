@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,19 +15,27 @@ public class GameController
         section = new Section();
         player = new Player(view.GetPlayer());
         SetActions();
-        ChangeMoveForce(Vector3.right);
     }
     public void SetActions()
     {
         player.ChangeForce = ChangeMoveForce;
         view.Right = player.MeveRight;
         view.Left = player.MeveLeft;
+        view.Up = player.Jump;
         view.UpdatePosition = player.CheckPosition;
+        view.GetPlayer().checkpoint = section.UpdateSections;
+        view.Run = Run;
+    }
 
+    private void Run()
+    {
+        view.SetForce(player.GetForse());
     }
 
     private void ChangeMoveForce(Vector3 force)
     {
         view.SetForce(force);
     }
+
+
 }

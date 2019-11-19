@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Section 
 {
+    private bool firstCheck = true;
     private const int SECTIONCOUNT = 5;
     private Queue<GameObject> sections;
     private float distanse = 0;
@@ -27,5 +28,14 @@ public class Section
         sections.Enqueue(ViewController.LoadSection(section, ref distanse));
     }
 
-
+    public void UpdateSections()
+    {
+        if (firstCheck)
+        {
+            firstCheck = false;
+            return;
+        }
+        ViewController.DestoyGameObject(sections.Dequeue());
+        SetRandomSection();
+    }
 }
