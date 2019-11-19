@@ -26,8 +26,33 @@ public class GameView : MonoBehaviour, IView
 
     void Start()
     {
-        camera = Camera.main;   
+        camera = Camera.main;
         playerRB = player.GetComponent<Rigidbody>();
+        if (Application.isMobilePlatform)
+            gameObject.AddComponent<SwipeDetector>().OnSwipe = OnSwipe;
+    }
+
+    private void OnSwipe(SwipeDirection direction)
+    {
+        switch (direction)
+        {
+            case SwipeDirection.Up:
+                playerRB.velocity += Vector3.up * Up();
+                break;
+            case SwipeDirection.Left:
+                Left();
+                break;
+            case SwipeDirection.Right:
+                Right();
+                break;
+            default:
+                if (!stranting)
+                {
+                    stranting = true;
+                    Run();
+                }
+                break;
+        }
     }
 
     private void Update()

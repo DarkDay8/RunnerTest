@@ -41,6 +41,12 @@ public enum SectionEnum : byte
     Section3,
     [ViewPath("Prefabs/Game/Sections/Section4")]
     Section4,
+}
 
-
+public enum SwipeDirection
+{
+    Up,
+    Down,
+    Left,
+    Right
 }
