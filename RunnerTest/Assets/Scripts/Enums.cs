@@ -33,4 +33,10 @@ public enum SectionEnum : byte
     Section1,
     [ViewPath("Prefabs/Game/Sections/Section2")]
     Section2,
+    [ViewPath("Prefabs/Game/Sections/Section3")]
+    Section3,
+    [ViewPath("Prefabs/Game/Sections/Section4")]
+    Section4,
+
+
 }
