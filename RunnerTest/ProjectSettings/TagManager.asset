@@ -7,6 +7,7 @@ TagManager:
   - Wall
   - Checkpoint
   - Road
+  - Bonus
   layers:
   - Default
   - TransparentFX

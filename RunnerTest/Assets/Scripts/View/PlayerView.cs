@@ -25,9 +25,6 @@ public class PlayerView : MonoBehaviour
             case roadTag:
                 road();
                 break;
-            case bonusTag:
-                TakeBonus(collision.gameObject);
-                break;
             default:
                 break;
         }
@@ -35,8 +32,17 @@ public class PlayerView : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals(checkTag))
-            checkpoint();
+        switch (other.tag)
+        {
+            case checkTag:
+                checkpoint();
+                break;
+            case bonusTag:
+                TakeBonus(other.gameObject);
+                break;
+            default:
+                break;
+        }
     }
 
     private void TakeBonus(GameObject go)

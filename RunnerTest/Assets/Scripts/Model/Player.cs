@@ -14,12 +14,16 @@ public class Player
     private const byte MAXLINE = 3;
     private const float LINEDISTANGE = 2;
     private float speedZ = 3;
-    private float speedX = 2;
+    private float baseSpeedX = 2;
+    private float accelerationSpeedX = 0.5f;
     private float jumpPower = 4;
 
+    private float currectSpeedX;
     private Vector3 force;
     private bool changingLine = false;
     private bool onRoad = false;
+    private bool left = false;
+    private bool right = false;
 
 
     public Vector3 GetForse()
@@ -35,18 +39,18 @@ public class Player
         this.player = player;
         player.road = OnRoad;
         player.coins = AddCoins;
-        force = new Vector3(speedX, 0, 0);
+        currectSpeedX = baseSpeedX;
+        force = new Vector3(currectSpeedX, 0, 0);
     }
-
-    public void MeveLeft()
+    public void SpeedAcceleration()
     {
-        if (line > 0 && !changingLine)
-        {
-            ChangeLine(speedZ);
-            line--;
-        }
-
+        currectSpeedX += accelerationSpeedX;
+        speedZ += accelerationSpeedX;
+        Vector3 ac = new Vector3(accelerationSpeedX, 0, 0);
+        force += ac;
+        ChangeForce(force);
     }
+
     public void AddCoins(int coins)
     {
         score += coins;
@@ -60,12 +64,21 @@ public class Player
         {
             ChangeLine(-speedZ);
             line++;
+            right = true;
         }
-
+    }
+    public void MeveLeft()
+    {
+        if (line > 0 && !changingLine)
+        {
+            ChangeLine(speedZ);
+            line--;
+            left = true;
+        }
     }
     public float Jump()
     {
-        if (onRoad)
+        if (onRoad && !changingLine)
         {
             onRoad = false;
             changingLine = true;
@@ -75,21 +88,23 @@ public class Player
     }
     private void ChangeLine(float speed)
     {
-        force = new Vector3(speedX, 0, speed);
+        force = new Vector3(currectSpeedX, 0, speed);
         changingLine = true;
         ChangeForce(force);
     }
 
     public void CheckPosition(Vector3 position)
     {
-        
-        if (Mathf.Abs(position.z - (line - 1) * -LINEDISTANGE) < 0.03f && onRoad && changingLine)
-        {
-            Debug.Log("Stop");
-            force = new Vector3(speedX, 0, 0);
-            changingLine = false;
-            ChangeForce(force);
-        }
+        if (!onRoad && !changingLine)
+            return;
 
+        if (position.z < (line - 1) * -LINEDISTANGE && left
+            || position.z > (line - 1) * -LINEDISTANGE && right)
+            return;
+       
+        Debug.Log("Stop");
+        force = new Vector3(currectSpeedX, 0, 0);
+        changingLine = left = right = false;
+        ChangeForce(force);
     }
 }

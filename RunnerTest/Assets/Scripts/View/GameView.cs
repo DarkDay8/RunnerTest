@@ -10,6 +10,8 @@ public class GameView : MonoBehaviour, IView
     [SerializeField]
     private Vector3 distanse;
 
+    private float currentTimer;
+    private float timerRange = 10f;
     private Vector3 direction;
     private new Camera camera;
     private Rigidbody playerRB;
@@ -19,6 +21,7 @@ public class GameView : MonoBehaviour, IView
     public Action Right;
     public Func<float> Up;
     public Action Run;
+    public Action SpeedAcceleration;
     public Action<Vector3> UpdatePosition;
 
 
@@ -29,23 +32,27 @@ public class GameView : MonoBehaviour, IView
         playerRB = player.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        UpdatePosition(player.transform.position);
-
         if (Input.GetKeyDown(KeyCode.A))
             Left();
         if (Input.GetKeyDown(KeyCode.D))
             Right();
         if (Input.GetKeyDown(KeyCode.W))
             playerRB.velocity += Vector3.up * Up();
-
-
-
         if (Input.anyKey && !stranting)
+        {
+            stranting = true;
             Run();
+        }
 
+
+    }
+
+
+    void FixedUpdate()
+    {
+        UpdatePosition(player.transform.position);
         Vector3 newVelosity = new Vector3(direction.x, playerRB.velocity.y, direction.z);
 
         playerRB.velocity = newVelosity;
@@ -53,6 +60,18 @@ public class GameView : MonoBehaviour, IView
             player.transform.position.x, 
             player.transform.position.y, 
             0) + distanse;
+
+        if (stranting)
+        {
+            if (currentTimer >= timerRange)
+            {
+                currentTimer = 0;
+                SpeedAcceleration();
+            }
+            else
+                currentTimer += Time.fixedDeltaTime;
+        }
+
     }
 
     public PlayerView GetPlayer()

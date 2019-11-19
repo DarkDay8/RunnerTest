@@ -25,6 +25,7 @@ public class GameController
         view.UpdatePosition = player.CheckPosition;
         view.GetPlayer().checkpoint = section.UpdateSections;
         view.Run = Run;
+        view.SpeedAcceleration = player.SpeedAcceleration;
     }
 
     private void Run()
