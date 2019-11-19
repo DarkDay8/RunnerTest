@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
 
-public static class ViewPathEnum
+public static class EnumContoller
+
 {
     public static string GetPath(Enum value)
     {
@@ -23,4 +24,10 @@ public static class ViewPathEnum
 
         return output;
     }
+    public static T RandomEnumValue<T>()
+    {
+        var v = Enum.GetValues(typeof(T));
+        return (T)v.GetValue(new Random().Next(v.Length));
+    }
+
 }

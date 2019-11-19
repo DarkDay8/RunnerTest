@@ -1,4 +1,6 @@
-﻿public class ViewPath : System.Attribute
+﻿using System;
+
+public class ViewPath : System.Attribute
 {
     private readonly string _value;
 
@@ -20,4 +22,15 @@ public enum ViewesEnum : byte
     Menu,
     [ViewPath("Prefabs/View/Game")]
     Game
+}
+
+//need path to correct instance
+public enum SectionEnum : byte
+{
+    [ViewPath("Prefabs/Game/Sections/Section")]
+    Section,
+    [ViewPath("Prefabs/Game/Sections/Section1")]
+    Section1,
+    [ViewPath("Prefabs/Game/Sections/Section2")]
+    Section2,
 }
