@@ -38,4 +38,9 @@ public class Section
         ViewController.DestoyGameObject(sections.Dequeue());
         SetRandomSection();
     }
+    public void RemoveAllSections()
+    {
+        while (sections.Count > 0)
+            ViewController.DestoyGameObject(sections.Dequeue());
+    }
 }

@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class GUIView : MonoBehaviour
-{
+public class GUIView : MonoBehaviour, IView
+{ 
     [SerializeField]
     private Text scoreValue;
 
@@ -12,4 +10,5 @@ public class GUIView : MonoBehaviour
     {
         scoreValue.text = value.ToString();
     }
+
 }

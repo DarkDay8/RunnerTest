@@ -21,7 +21,11 @@ public enum ViewesEnum : byte
     [ViewPath("Prefabs/View/Menu")] 
     Menu,
     [ViewPath("Prefabs/View/Game")]
-    Game
+    Game,
+    [ViewPath("Prefabs/View/GameGUI")]
+    GameGUI,
+    [ViewPath("Prefabs/View/EndGame")]
+    EndGame
 }
 
 //need path to correct instance

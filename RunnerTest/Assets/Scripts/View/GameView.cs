@@ -9,8 +9,6 @@ public class GameView : MonoBehaviour, IView
     private PlayerView player;    
     [SerializeField]
     private Vector3 distanse;
-    [SerializeField]
-    private GUIView gui;
 
     private float currentTimer;
     private float timerRange = 10f;
@@ -26,11 +24,6 @@ public class GameView : MonoBehaviour, IView
     public Action SpeedAcceleration;
     public Action<Vector3> UpdatePosition;
 
-
-    void Awake()
-    {
-        gui = Instantiate<GUIView>(gui);
-    }
     void Start()
     {
         camera = Camera.main;   
@@ -84,10 +77,4 @@ public class GameView : MonoBehaviour, IView
     {
         direction = d;
     }
-    public GUIView GetGUI()
-    {
-        return gui;
-    }
-
-
 }

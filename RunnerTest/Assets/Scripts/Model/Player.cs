@@ -26,6 +26,10 @@ public class Player
     private bool right = false;
 
 
+    public int GetScore()
+    {
+        return score;
+    }
     public Vector3 GetForse()
     {
         return force;
