@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player 
 {
     public Action<Vector3> ChangeForce;
+    public Action<int> ChangeGUI;
 
     private PlayerView player;
     private int score = 0;
@@ -33,6 +34,7 @@ public class Player
     {
         this.player = player;
         player.road = OnRoad;
+        player.coins = AddCoins;
         force = new Vector3(speedX, 0, 0);
     }
 
@@ -45,6 +47,13 @@ public class Player
         }
 
     }
+    public void AddCoins(int coins)
+    {
+        score += coins;
+        //ChangeGUI(score);
+        Debug.Log("Score: " + score);
+    }
+
     public void MeveRight()
     {
         if (line < MAXLINE - 1 && !changingLine)

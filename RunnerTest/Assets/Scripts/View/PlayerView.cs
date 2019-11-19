@@ -5,12 +5,11 @@ using UnityEngine;
 
 public class PlayerView : MonoBehaviour
 {
-    [SerializeField]
-    private string wallTag = "Wall";
-    [SerializeField]
-    private string roadTag = "Road";
-    [SerializeField]
-    private string CheckTag = "Checkpoint";
+    private const string wallTag = "Wall";
+    private const string roadTag = "Road";
+    private const string checkTag = "Checkpoint";
+    private const string bonusTag = "Bonus";
+
     public Action wall;
     public Action road;
     public Action checkpoint;
@@ -18,15 +17,34 @@ public class PlayerView : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag.Equals(wallTag))
-            wall();
-        if (collision.gameObject.tag.Equals(roadTag))
-            road();
+        switch (collision.gameObject.tag)
+        {
+            case wallTag:
+                wall();
+                break;
+            case roadTag:
+                road();
+                break;
+            case bonusTag:
+                TakeBonus(collision.gameObject);
+                break;
+            default:
+                break;
+        }
+
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag.Equals(CheckTag))
+        if (other.tag.Equals(checkTag))
             checkpoint();
+    }
+
+    private void TakeBonus(GameObject go)
+    {
+        int coinbonus = 10;
+        if (go.name.Contains("coin"))
+            coins(coinbonus);
+        Destroy(go);
     }
 
 
